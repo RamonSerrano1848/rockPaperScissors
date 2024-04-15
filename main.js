@@ -1,9 +1,12 @@
 
+
 choices = ['Rock', 'Paper', 'Scissors']
 let userScore = 0;
 let computerScore = 0;
 
 function getUserChoice() {
+    const ps = require('prompt-sync');
+    const prompt = ps();
     let userChoice = prompt('Which weapon do you choose: Rock, Paper or Scissors?');
     console.log(`User Choice: ${userChoice}`);
     return userChoice
