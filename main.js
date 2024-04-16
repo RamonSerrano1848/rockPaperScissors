@@ -1,11 +1,24 @@
 
-choices = ['Rock', 'Paper', 'Scissors']
+
 let userScore = 0;
 let computerScore = 0;
 
-function getUserChoice() {
-    let userChoice = prompt('Which weapon do you choose: Rock, Paper or Scissors?');
-    console.log(`User Choice: ${userChoice}`);
+const prompt = require("prompt-sync")();
+
+const rock = document.querySelector('#Rock');
+const paper = document.querySelector('#Paper');
+const scissors = document.querySelector('#Scissors');
+
+
+rock.addEventListener('click', () => {
+    alert('hi there');
+});
+
+paper.onclick = () => alert("hello World!");;
+scissors.onclick = () => getUserChoice('Scissors');
+
+function getUserChoice(userChoice) {
+    alert(userChoice);
     return userChoice
 }
 
@@ -31,6 +44,8 @@ function playRPS(userChoice, computerChoice) {
         console.log(`${userScore} vs ${computerScore}`);
     }
 
-while (userScore != 5 && computerScore != 5) {
-    playRPS(getUserChoice(), getComputerChoice());
-}
+// playRPS(getUserChoice(), getComputerChoice());
+
+// while (userScore != 5 && computerScore != 5) {
+// playRPS(getUserChoice(), getComputerChoice());
+// }

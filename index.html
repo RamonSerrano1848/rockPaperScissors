@@ -4,10 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600");
+        *{
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        body{
+            background: black;
+        }
+        header{
+            display: flex;
+            width: 60vw;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px auto 100px;
+            padding: 20px 50px 20px;
+            border: grey 1px solid;
+            border-radius: 20px;
+        }
+        header p {
+            font-size: 32px;
+            font-weight: 600;
+        }
+        #title {
+            font-size: 24px;
+            font-weight: 600;
+            list-style: none;
+        }
+        img{
+            width: 200px;
+            border-radius: 20px;
+            border: none;
+        }
+        #content{
+            width: 90vw;
+            margin: 20px 80px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #container div{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-items: center;
+            gap: 100px;
+        }
+        .scissors{
+            grid-column: 1 / span 2;
+        }
+        #result{
+            grid-column: 1 / span 3;
+        }
+    </style>
+
+
 </head>
 <body>
-    <h1>Rock, Paper Scissors!</h1>
+    <div id = "header">
+        <div class = "container">
+            <header>
+                <ul id = "title">
+                    <li>Rock</li>
+                    <li>Paper</li>
+                    <li>Scissors</li>
+                </ul>
+                <p>Score<br><span id='score'>0/0</span></p>
+            </header>
+        </div>
+    </div>
+    <div id = "content">
+        <div id = "container">
+            <div class="rps">
+                <img class="rock" src="images/Rock.jpg"></img>
+                <img class="paper" src="images/Paper.jpg"></img>
+                <img class ="scissors" src="images/Scissors.jpg"></img>
+                <div id="result">hello you. whats up.</div>
+            </div>
+        </div>
+    </div>
 
-    <script src = "main.js"></script>
+    <script>
+        const rock = document.querySelector('.rock');
+        const paper = document.querySelector('.paper');
+        const scissors = document.querySelector('.scissors');
+        choices = ['Rock', 'Paper', 'Scissors'];
+
+        let userScore = 0;
+        let computerScore = 0;
+
+        function getComputerChoice() {
+            let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+            console.log(`Computer Choice: ${computerChoice}`);
+            return computerChoice
+        }
+
+        rock.addEventListener('click', () => {
+            playRPS('Rock', getComputerChoice());
+        });
+        paper.addEventListener('click', () => {
+            playRPS('Paper', getComputerChoice());
+        });
+        scissors.addEventListener('click', () => {
+            playRPS('Scissors', getComputerChoice());
+        });
+
+
+        function playRPS(userChoice, computerChoice) {
+
+            const section = document.querySelector('.rps');
+            const results = document.querySelector('#result');
+            const score = document.querySelector('#score')
+
+            if (userChoice === 'Rock') {
+                paper.style.opacity = 0.5;
+                scissors.style.opacity = 0.5;
+            }
+            else if (userChoice === 'Paper'){
+                rock.style.opacity = 0.5;
+                scissors.style.opacity = 0.5;
+            }
+            else if (userChoice === 'Scissors'){
+                paper.style.opacity = 0.5;
+                rock.style.opacity = 0.5;
+            }
+
+            if (computerChoice === userChoice) {
+
+                results.textContent = 'Oh no, it is a draw. ' + userChoice + ' vs. ' + computerChoice;
+
+            } else if (computerChoice === ' Rock ' && userChoice === ' Scissors ' || computerChoice === ' Paper ' && userChoice === ' Rock '
+                || computerChoice === ' Scissors ' && userChoice === ' Paper ') {
+                computerScore++;
+                results.textContent = ' You lose! ' + computerChoice + ' beats ' + userChoice;
+            } else {
+                userScore++;
+                results.textContent = 'You win! ' + userChoice + ' beats ' + computerChoice;
+            }
+            score.textContent = userScore + ' / ' + computerScore;
+            score.appendChild(score);
+        }
+
+
+    </script>
+
+
 </body>
+
 </html>
